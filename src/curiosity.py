@@ -183,25 +183,9 @@ class CuriosityModule():
         self.optimizer = optim.Adam(self.model.parameters(), lr=curiosity_lr)
     
     def get_reward(self, states, actions, next_states, dones):
-#         if hasattr(self.model, 'action_space') and isinstance(self.model.action_space, gym.spaces.discrete.Discrete):
-#             actions = torch.as_tensor(actions, dtype=torch.long)
-#         else:
-#             actions = torch.as_tensor(actions, dtype=torch.float32)
-            
-#         states = torch.as_tensor(states, dtype=torch.float32)
-#         next_states = torch.as_tensor(next_states, dtype=torch.float32)
-#         dones = torch.as_tensor(dones, dtype=torch.bool)
         return self.rew_coef * self.model.reward(states, actions, next_states, dones)
     
     def update(self, states, actions, next_states, dones):
-#         if hasattr(self.model, 'action_space') and isinstance(self.model.action_space, gym.spaces.discrete.Discrete):
-#             actions = torch.as_tensor(actions, dtype=torch.long).view(-1)
-#         else:
-#             actions = torch.as_tensor(actions, dtype=torch.float32)
-#         states = torch.as_tensor(states, dtype=torch.float32)
-#         next_states = torch.as_tensor(next_states, dtype=torch.float32)
-#         dones = torch.as_tensor(dones, dtype=torch.bool)
-        
         self.optimizer.zero_grad()
         loss = self.model.loss(states, actions, next_states, dones)
         loss.backward()
