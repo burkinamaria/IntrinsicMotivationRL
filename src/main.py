@@ -94,10 +94,11 @@ def read_all_train_results(env_name):
     n_launches = 5
     path = './'
     for name in os.listdir(os.path.join(path, env_name)):
-        for i in range(n_launches):
-            with open(os.path.join(path, env_name, name, str(i)), 'rb') as f:
-                stats = pickle.load(f)
-                methods_stats[name].append(stats)
+        if not name.startswith(".") :
+            for i in range(n_launches):
+                with open(os.path.join(path, env_name, name, str(i)), 'rb') as f:
+                    stats = pickle.load(f)
+                    methods_stats[name].append(stats)
     return methods_stats
 
 
