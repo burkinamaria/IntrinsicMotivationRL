@@ -115,4 +115,4 @@ ICM and RND always find the goal position and PPO with normalizations succeeds i
 
 ## Summary
 
-Intrinsic motivations can really help with exploration, especially RND and ICM, but ICM requires careful tuning of its scale factor. Different done flag settings lead to slightly different results.
+Intrinsic motivations can really help with exploration, especially RND and ICM, but ICM requires careful tuning of its scale factor. Different done flag settings lead to slightly different results, but qualitatively they remain the same.
