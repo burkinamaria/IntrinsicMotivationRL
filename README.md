@@ -39,8 +39,6 @@ The next graph shows that PPO with intrinsic motivation usually finds the goal f
 ![MountainCar-v0-all_motivations](src/pictures/train_rew_all_motivations_MountainCar-v0.png)
 *Training curves of each algorithm averaged over 5 launches of training.*
 
-In this case normalizations don't help PPO, but in the next setting they will (see below).
-
 ### Results using default done flag:
 
 In this setting RND beats other algorithms, and ICM perform worse than simple PPO.
