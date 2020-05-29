@@ -36,11 +36,7 @@ By default, agent gets the done signal when it reaches the goal position or when
 
 The next graph shows that PPO with intrinsic motivation usually finds the goal faster than a simple PPO. Also we can see that ICM beats other algorithms in fast finding the goal position, however it achieves the winning score (>-110 pts) slower. We will discuss this and other features of each method below.
 
-<<<<<<< Updated upstream
-![MountainCar-v0-all_motivations](src/pictures/train_rew_all_motivations_MountainCar-v0.png) 
-=======
-![MountainCar-v0-all_motivations](./pictures/train_rew_all_motivations_MountainCar-v0.png) 
->>>>>>> Stashed changes
+![MountainCar-v0-all_motivations](src/pictures/train_rew_all_motivations_MountainCar-v0.png)
 *Training curves of each algorithm averaged over 5 launches of training.*
 
 In this case normalizations don't help PPO, but in the next setting they will (see below).
@@ -49,20 +45,12 @@ In this case normalizations don't help PPO, but in the next setting they will (s
 
 In this setting RND beats other algorithms, and ICM perform worse than simple PPO.
 
-<<<<<<< Updated upstream
-![MountainCar-v0-all_motivations](src/pictures/train_rew_all_motivations_MountainCar-v0_default_done.png) 
-=======
-![MountainCar-v0-all_motivations](./pictures/train_rew_all_motivations_MountainCar-v0_default_done.png) 
->>>>>>> Stashed changes
+![MountainCar-v0-all_motivations](src/pictures/train_rew_all_motivations_MountainCar-v0_default_done.png)
 *Training curves of each algorithm averaged over 5 launches of training.*
 
 We can compare results obtained by simple PPO+curiosity with results obtained by PPO with normalizations:
 
-<<<<<<< Updated upstream
 ![MountainCar-v0-all_motivations_norm](src/pictures/train_rew_normalizations_MountainCar-v0_default_done.png)
-=======
-![MountainCar-v0-all_motivations_norm](./pictures/train_rew_normalizations_MountainCar-v0_default_done.png)
->>>>>>> Stashed changes
 
 So, although simple PPO with RND works more stable than PPO with observation normalization, it can't achieve the perfomance of PPO with both observation and reward normalization. 
 
@@ -70,10 +58,6 @@ So, although simple PPO with RND works more stable than PPO with observation nor
 
 Here we'll show that the peaks of intrinsic rewards of all methods are well corellated with the moment when we start achieving the goal position, and also we'll discuss specific features of each method:
 
-<<<<<<< Updated upstream
-=======
-$$$$
->>>>>>> Stashed changes
 <details>
 <summary><b>1. Forward dynamics model loss</b></summary>
 As we expected, the loss of the forward dynamics model is well correlated with the moment when we start achieving goal. Another good feature is that the total intrinsic episode reward doesn't greatly exceed maximum intrinsic reward during the episode, which means that intrinsic reward is mostly small and exceeds zero only at some interesting transitions.
