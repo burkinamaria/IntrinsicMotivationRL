@@ -1,0 +1,5 @@
+numpy
+matplotlib
+gym
+git+git://github.com/ikostrikov/pytorch-a2c-ppo-acktr-gail.git#egg=a2c_ppo_acktr
+git+git://github.com/openai/baselines.git#egg=baselines
