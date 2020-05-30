@@ -107,7 +107,7 @@ def main():
     env_parameters = {'MountainCar-v0': {'cur_models': {'ForwardDynLoss': [ForwardModel, 10.],
                                                         'InverseDynLoss': [InverseModel, 0.5],
                                                         'RND': [RND, 10.],
-                                                        'ICM': [ICM, 50.]},
+                                                        'ICM': [ICM, 10.]},
                                          'num_env_steps': int(2e6)},
                       'MountainCarContinuous-v0': {'cur_models': {'ForwardDynLoss': [ForwardModel, 20.],
                                                                   'InverseDynLoss': [InverseModel, 0.5],

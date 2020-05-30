@@ -30,23 +30,32 @@ This exploration method uses two neural networks: the first one is fixed and def
 
 __MountainCar-v0__ is a relatively simple environment with a sparse reward: agent gets -1 for each time step until the goal position is reached.
 
-By default, agent gets the done signal when it reaches the goal position or when the episode length exceeds some default time limit. We can consider or not consider the done flag, obtained by exceeding time limit, as true done signal (parameter ```use_proper_time_limits``` in ```ppo_config.py```). As we'll see below, it leads to different results.
+By default, agent gets the done signal when it reaches the goal position or when the episode length exceeds some default time limit. We can consider or not consider the done flag, obtained by exceeding time limit, as true done signal (parameter ```use_proper_time_limits``` in ```ppo_config.py```). As we'll see below, it leads to slightly different results.
 
 ### Results using the done flag when reaching the goal only:
 
-The next graph shows that PPO with intrinsic motivation usually finds the goal faster than a simple PPO. Also we can see that ICM beats other algorithms in fast finding the goal position, however it achieves the winning score (>-110 pts) slower. We will discuss this and other features of each method below.
+The next graph shows that PPO with intrinsic motivation usually finds the goal faster than a simple PPO. We can see that ICM beats other algorithms in fast finding the goal position, however its scaling factor is hard to tune: if it's 50, it's less noisy but converges to the lower final score, if it's 10 it converges to the winning score, but sometimes it takes many steps. We will discuss this and other features of each method below.
 
 ![MountainCar-v0-all_motivations](src/pictures/train_rew_all_motivations_MountainCar-v0.png)
-*Training curves of each algorithm averaged over 5 launches of training.*
+*Training curves of each algorithm averaged over 5 launches of training. (ICM with scaling factor of 50)*
+
+![MountainCar-v0-all_motivations](src/pictures/train_rew_all_MountainCar-v0.png)
+*Training curves of each algorithm averaged over 5 launches of training. (ICM with scaling factor of 10)*
+
+We can compare results obtained by simple PPO+curiosity with results obtained by PPO with normalizations:
+
+![MountainCar-v0-all_motivations](src/pictures/train_rew_all_normalizations_MountainCar-v0.png)
+
+So, PPO with RND or ICM can't beat PPO with normalizations. 
 
 ### Results using default done flag:
 
-In this setting RND beats other algorithms, and ICM perform worse than simple PPO.
+In this setting RND beats other algorithms, and ICM performs worse than simple PPO.
 
 ![MountainCar-v0-all_motivations](src/pictures/train_rew_all_motivations_MountainCar-v0_default_done.png)
 *Training curves of each algorithm averaged over 5 launches of training.*
 
-We can compare results obtained by simple PPO+curiosity with results obtained by PPO with normalizations:
+Again, we can compare results obtained by simple PPO+curiosity with results obtained by PPO with normalizations:
 
 ![MountainCar-v0-all_motivations_norm](src/pictures/train_rew_normalizations_MountainCar-v0_default_done.png)
 
@@ -81,11 +90,11 @@ For example, the scaling factor 10 was used in the setting with default done fla
 
 ![intrinsic_stats_RND_MountainCar-v0](src/pictures/intrinsic_stats_icm_default_done_MountainCar-v0_default_done.png)
     
-And scaling factor 50 was used in the setting with proper done flag:
+And this scaling factor in the setting with proper done flag:
 
-![intrinsic_stats_RND_MountainCar-v0](src/pictures/intrinsic_stats_icm_true_done_MountainCar-v0_true_done.png)    
+![intrinsic_stats_RND_MountainCar-v0](src/pictures/intrinsic_stats_icm_10_true_done_MountainCar-v0_true_done.png)    
 
-So it appears that the big scale of the intrinsic reward in the experiment with proper done flag is the main reason it converges slower, and its small scale in the second experiment is the reason why it doesn't enhance exploration.
+It appears that the big scale of the intrinsic reward in the experiment with proper done flag (when scaling factor equals 50) is the main reason it converges slower, and its small scale in the second experiment is the reason why it doesn't enhance exploration. So this parameter should be tuned very carefully.
 
 </details>
 
@@ -115,4 +124,8 @@ ICM and RND always find the goal position and PPO with normalizations succeeds i
 
 ## Summary
 
-Intrinsic motivations can really help with exploration, especially RND and ICM, but ICM requires careful tuning of its scale factor. Different done flag settings lead to slightly different results, but qualitatively they remain the same.
+- Intrinsic motivations can really help with exploration (like in the __MountainCarContinuous-v0__ environment), especially RND and ICM, but ICM requires careful tuning of its scale factor.
+
+- Sometimes reward and observation normalization is enough for comparable perfomance.
+
+- Different done flag settings lead to the slightly different results, but qualitatively they remain the same.

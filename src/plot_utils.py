@@ -53,7 +53,7 @@ def plot_stats_with_curiosity(stats, agent, n_updates, total_n_steps, fps):
     plt.figure(figsize=[16, 17])
 
     plt.subplot(4, 2, 1)
-    plt.title("Extrinsic last 100 episodes reward")
+    plt.title("Extrinsic last {} episodes reward".format(len(stats.episode_rewards)))
     plt.plot(stats.env_step, stats.mean_rw_history, label='Mean')
     plt.plot(stats.env_step, stats.median_rw_history, label='Median')
     plt.fill_between(stats.env_step, stats.min_rw_history, stats.max_rw_history, alpha=0.3)
@@ -61,7 +61,7 @@ def plot_stats_with_curiosity(stats, agent, n_updates, total_n_steps, fps):
     plt.grid()
 
     plt.subplot(4, 2, 2)
-    plt.title("Intrinsic last 100 episodes reward")
+    plt.title("Intrinsic last {} episodes reward".format(len(stats.episode_rewards)))
     plt.plot(stats.env_step, stats.mean_curiosity_history, label='Mean')
     plt.plot(stats.env_step, stats.median_curiosity_history, label='Median')
     plt.fill_between(stats.env_step, stats.min_curiosity_history, stats.max_curiosity_history, alpha=0.3)
@@ -147,12 +147,12 @@ def plot_curiosity_history(save_path, pic_prefix, stats, method_name, env_name, 
     
     skip_first = 5 # sometimes the loss on the first steps is too big compared with the next loss we want to look at
     plt.subplot(2, 2, 1)
-    plt.title("Extrinsic episode reward (averaged by 50 last episodes)")
+    plt.title("Extrinsic episode reward (averaged by {} last episodes)".format(len(stats.episode_rewards)))
     plt.plot(log_steps[skip_first:length], stats.mean_rw_history[skip_first:length])
     plt.grid()
 
     plt.subplot(2, 2, 2)
-    plt.title("Intrinsic episode reward (averaged by 50 last episodes)")
+    plt.title("Intrinsic episode reward (averaged by {} last episodes)".format(len(stats.episode_rewards)))
     plt.plot(log_steps[skip_first:length], stats.mean_curiosity_history[skip_first:length])
     plt.grid()
 
